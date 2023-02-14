@@ -1,6 +1,21 @@
-DROP DATABASE IF EXISTS SpotifyClone;
+DROP DATABASE IF EXISTS SpotifyClone;  
 
 CREATE DATABASE IF NOT EXISTS SpotifyClone;
+
+CREATE TABLE SpotifyClone.planos(
+	plano_id TINYINT AUTO_INCREMENT,
+	nome_plano VARCHAR(13) NOT NULL ,
+	valor_plano DECIMAL(3, 2) NOT NULL,
+    CONSTRAINT PRIMARY KEY (plano_id)
+) engine = InnoDB;
+
+INSERT INTO SpotifyClone.planos
+	(nome_plano, valor_plano)
+VALUE 
+	('gratuito', 0.00),
+	('familiar', 7.99),
+	('universitário', 5.99),
+	('pessoal', 6.99);
 
 CREATE TABLE SpotifyClone.usuarios (
     usuario_id TINYINT AUTO_INCREMENT,
@@ -26,26 +41,37 @@ VALUE
      ('Judith Butler', '45', '4', '2020-05-13'),
      ('Jorge Amado', '58', '4', '2017-02-17');
 
-CREATE TABLE SpotifyClone.planos(
-	plano_id TINYINT AUTO_INCREMENT,
-	nome_plano VARCHAR(13) NOT NULL ,
-	valor_plano DECIMAL(3, 2) NOT NULL,
-    CONSTRAINT PRIMARY KEY (plano_id)
-) engine = InnoDB;
 
-INSERT INTO SpotifyClone.planos
-	(nome_plano, valor_plano)
+CREATE TABLE SpotifyClone.historico_de_musicas(
+	usuario_id TINYINT,
+    musica_id TINYINT NOT NULL, -- FOREING KEY da tabela musicas
+    data_reproducao DATETIME NOT NULL,
+    CONSTRAINT
+		PRIMARY KEY (usuario_id, musica_id),
+        FOREIGN KEY (usuario_id) REFERENCES SpotifyClone.usuarios (usuario_id)
+  ) engine = InnoDB;
+
+INSERT INTO SpotifyClone.historico_de_musicas
+	(usuario_id, musica_id, data_reproducao)
 VALUE 
-	('gratuito', 0),
-	('familiar', 7.99),
-	('universitário', 5.99),
-	('pessoal', 6.99);
-	
+	('1', '8', '2022-02-28 10:45:55'),
+	('1', '2', '2020-05-02 05:30:35'),
+	('1', '10', '2020-03-06 11:22:33'),
+	('2', '10', '2022-08-05 08:05:17'),
+	('2', '7', '2020-01-02 07:40:33'),
+	('3', '10', '2020-11-13 16:55:13'),
+	('3', '2', '2020-12-05 18:38:30'),
+	('4', '8', '2021-08-15 17:10:10'),
+	('5', '8', '2022-01-09 01:44:33'),
+	('5', '5', '2020-08-06 15:23:43'),
+	('6', '7', '2017-01-24 00:31:17'),
+	('6', '1', '2017-10-12 12:35:20'),
+	('7', '4', '2011-12-15 22:30:49'),
+	('8', '4', '2012-03-17 14:56:41'),
+	('9', '9', '2022-02-24 21:14:22'),
+	('10', '10', '2015-12-13 08:30:22');
 
 
--- CREATE TABLE SpotifyClone.historico_de_musicas(
-
---   ) engine = InnoDB;
 --   CREATE TABLE SpotifyClone.artistas_seguidos(
 
 --   ) engine = InnoDB;
@@ -64,4 +90,3 @@ VALUE
 --   coluna2 tipo restricoes,
 --   colunaN tipo restricoes,
 -- ) engine = InnoDB;
-

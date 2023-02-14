@@ -41,17 +41,45 @@ VALUE
      ('Judith Butler', '45', '4', '2020-05-13'),
      ('Jorge Amado', '58', '4', '2017-02-17');
      
---   CREATE TABLE SpotifyClone.albuns(
+--   CREATE TABLE SpotifyClone.artistas(
 
 --   ) engine = InnoDB;
 
+
+
+
+CREATE TABLE SpotifyClone.albuns(
+	album_id TINYINT AUTO_INCREMENT,
+    nome_album VARCHAR(20) NOT NULL ,
+    artista_id TINYINT NOT NULL, -- FOREING KEY da tabela artista
+    ano_lancamento YEAR NOT NULL,
+    CONSTRAINT
+		PRIMARY KEY (album_id)
+) engine = InnoDB;
+
+INSERT INTO SpotifyClone.albuns
+	(album_id, nome_album, artista_id, ano_lancamento)
+VALUE 
+    ('1', 'Renaissance', '1', '2022'),
+    ('2', 'Jazz', '2', '1978'),
+    ('3', 'Hot Space', '2', '1982'),
+    ('4', 'Falso Brilhante', '3', '1998'),
+    ('5', 'Vento de Maio', '3', '2001'),
+    ('6', 'QVVJFA?', '4', '2003'),
+    ('7', 'Somewhere Far Beyond', '5', '2007'),
+    ('8', 'I Put A Spell On You', '6', '2012');
+    
+    
+    
+
 CREATE TABLE SpotifyClone.musicas(
-	album_id TINYINT, -- FOREING KEY da tabela albums
+	album_id TINYINT,
 	musica_id TINYINT AUTO_INCREMENT,
 	nome_musica VARCHAR(36) NOT NULL,
 	duracao_segundos SMALLINT NOT NULL,
     CONSTRAINT
-		PRIMARY KEY (musica_id)	
+		PRIMARY KEY (musica_id),
+        FOREIGN KEY (album_id) REFERENCES SpotifyClone.albuns (album_id)
 ) engine = InnoDB;
 
 INSERT INTO SpotifyClone.musicas 
@@ -67,6 +95,8 @@ VALUE
     ('6', 'Samba em Paris', '267'),
     ('7', 'The Bard’s Song', '244'),
     ('8', 'Feeling Good', '100');
+    
+    
 
 CREATE TABLE SpotifyClone.historico_de_musicas(
 	usuario_id TINYINT,
@@ -98,12 +128,8 @@ VALUE
 	('10', '10', '2015-12-13 08:30:22');
 
 -- CREATE TABLE SpotifyClone.artistas_seguidos(
- 	
---   ) engine = InnoDB;
-
---   CREATE TABLE SpotifyClone.artistas(
-
---   ) engine = InnoDB;
+--  	
+-- ) engine = InnoDB;
 
 
 -- CREATE TABLE SpotifyClone.tabela2(

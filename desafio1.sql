@@ -41,9 +41,6 @@ VALUE
      ('Judith Butler', '45', '4', '2020-05-13'),
      ('Jorge Amado', '58', '4', '2017-02-17');
 
-
-
-
 CREATE TABLE SpotifyClone.artistas(
 	artista_id TINYINT AUTO_INCREMENT, 
     nome_artista VARCHAR(20) NOT NULL,
@@ -60,9 +57,6 @@ VALUE
     ('Baco Exu do Blues'),
     ('Blind Guardian'),
     ('Nina Simone');
-
-
-
 
 CREATE TABLE SpotifyClone.albuns(
 	album_id TINYINT AUTO_INCREMENT,
@@ -85,9 +79,6 @@ VALUE
     ('6', 'QVVJFA?', '4', '2003'),
     ('7', 'Somewhere Far Beyond', '5', '2007'),
     ('8', 'I Put A Spell On You', '6', '2012');
-    
-    
-    
     
 CREATE TABLE SpotifyClone.musicas(
 	album_id TINYINT,
@@ -112,17 +103,15 @@ VALUE
     ('6', 'Samba em Paris', '267'),
     ('7', 'The Bard’s Song', '244'),
     ('8', 'Feeling Good', '100');
-    
-    
-
 
 CREATE TABLE SpotifyClone.historico_de_musicas(
 	usuario_id TINYINT,
-    musica_id TINYINT NOT NULL,
+    musica_id TINYINT,
     data_reproducao DATETIME NOT NULL,
     CONSTRAINT
 		PRIMARY KEY (usuario_id, musica_id),
-        FOREIGN KEY (usuario_id) REFERENCES SpotifyClone.usuarios (usuario_id)
+        FOREIGN KEY (usuario_id) REFERENCES SpotifyClone.usuarios (usuario_id),
+        FOREIGN KEY (musica_id) REFERENCES SpotifyClone.musicas (musica_id)
   ) engine = InnoDB;
 
 INSERT INTO SpotifyClone.historico_de_musicas
@@ -145,13 +134,28 @@ VALUE
 	('9', '9', '2022-02-24 21:14:22'),
 	('10', '10', '2015-12-13 08:30:22');
 
--- CREATE TABLE SpotifyClone.artistas_seguidos(
---  	
--- ) engine = InnoDB;
+CREATE TABLE SpotifyClone.artistas_seguidos(
+	usuario_id TINYINT NOT NULL,
+    artista_id TINYINT,
+    CONSTRAINT
+		PRIMARY KEY (usuario_id, artista_id),
+        FOREIGN KEY (usuario_id) REFERENCES SpotifyClone.usuarios (usuario_id),
+        FOREIGN KEY (artista_id) REFERENCES SpotifyClone.artistas (artista_id)
+) engine = InnoDB;
 
-
--- CREATE TABLE SpotifyClone.tabela2(
---   coluna1 tipo restricoes,
---   coluna2 tipo restricoes,
---   colunaN tipo restricoes,
--- ) engine = InnoDB;
+INSERT INTO SpotifyClone.artistas_seguidos
+	(usuario_id, artista_id)
+VALUE 
+	('1', '1'),
+	('1', '2'),
+	('1', '3'),
+	('2', '1'),
+	('2', '3'),
+	('3', '2'),
+	('4', '4'),
+	('5', '5'),
+	('5', '6'),
+	('6', '6'),
+	('6', '1'),
+	('9', '3'),
+	('10', '2');

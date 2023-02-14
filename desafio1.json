@@ -5,7 +5,7 @@
   "coluna_plano": "nome_plano",
   "tabela_historico_de_reproducoes": "historico_de_musicas",
   "coluna_historico_de_reproducoes": "musica_id",
-  "tabela_seguindo_artistas": "artistas_seguidos",
+  "tabela_seguindo_artistas": "usuario_segue",
   "coluna_seguindo_artistas": "artista_id",
   "tabela_artista": "artistas",
   "coluna_artista": "nome_artista",

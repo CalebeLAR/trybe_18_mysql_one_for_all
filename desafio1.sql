@@ -134,8 +134,8 @@ VALUE
 	('9', '9', '2022-02-24 21:14:22'),
 	('10', '10', '2015-12-13 08:30:22');
 
-CREATE TABLE SpotifyClone.artistas_seguidos(
-	usuario_id TINYINT NOT NULL,
+CREATE TABLE SpotifyClone.usuario_segue(
+	usuario_id TINYINT,
     artista_id TINYINT,
     CONSTRAINT
 		PRIMARY KEY (usuario_id, artista_id),
@@ -143,19 +143,21 @@ CREATE TABLE SpotifyClone.artistas_seguidos(
         FOREIGN KEY (artista_id) REFERENCES SpotifyClone.artistas (artista_id)
 ) engine = InnoDB;
 
-INSERT INTO SpotifyClone.artistas_seguidos
+INSERT INTO SpotifyClone.usuario_segue
 	(usuario_id, artista_id)
-VALUE 
-	('1', '1'),
-	('1', '2'),
-	('1', '3'),
-	('2', '1'),
-	('2', '3'),
-	('3', '2'),
-	('4', '4'),
-	('5', '5'),
-	('5', '6'),
-	('6', '6'),
-	('6', '1'),
-	('9', '3'),
-	('10', '2');
+VALUE
+    ('1', '1'),
+    ('1', '2'),
+    ('1', '3'),
+    ('2', '1'),
+    ('2', '3'),
+    ('3', '2'),
+    ('4', '4'),
+    ('5', '5'),
+    ('5', '6'),
+    ('6', '6'),
+    ('6', '1'),
+    ('7', '6'),
+    -- ('8', ''),
+    ('9', '3'),
+    ('10', '2');
